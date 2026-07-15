@@ -1,0 +1,6 @@
+[submodule "dependencies/simdjson"]
+	path = dependencies/simdjson
+	url = https://github.com/simdjson/simdjson.git
+[submodule "dependencies/websocketapp"]
+	path = dependencies/websocketapp
+	url = https://github.com/zaphoyd/websocketpp.git

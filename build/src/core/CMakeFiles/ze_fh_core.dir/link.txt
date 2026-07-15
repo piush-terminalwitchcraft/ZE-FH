@@ -1,0 +1,2 @@
+/usr/bin/ar qc libze_fh_core.a CMakeFiles/ze_fh_core.dir/thread.cpp.o
+/usr/bin/ranlib libze_fh_core.a
