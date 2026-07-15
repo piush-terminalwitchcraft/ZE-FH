@@ -1,14 +1,9 @@
 #include "include/ZE/FH/Core/thread.h"
 
-namespace ZE::FH::Core {
-  
-  void Thread::run()
-  {
+namespace ZE::FH::Core
+{
 
-  }
+    void Thread::run() {}
 
-  void Thread::stop()
-  {
-    
-  }
-}
+    void Thread::stop() {}
+} // namespace ZE::FH::Core

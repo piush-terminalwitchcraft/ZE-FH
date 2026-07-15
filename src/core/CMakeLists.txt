@@ -23,5 +23,6 @@ message(STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 file(GLOB CORE_SOURCES "*.cpp")
 file(GLOB CORE_HEADERS "include/*.h")
 
-add_library(ze_fh_core ${CORE_SOURCES} ${CORE_HEADERS})
+add_library(ze_fh_core ${CORE_SOURCES} ${CORE_HEADERS}
+        ../fh/Config.cpp)
 target_include_directories(ze_fh_core PUBLIC include)

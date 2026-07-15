@@ -1,11 +1,11 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/piushpaul/Projects/ze/fh/build/cmake_install.cmake",
-		"/Users/piushpaul/Projects/ze/fh/build/dependencies/cmake_install.cmake",
-		"/Users/piushpaul/Projects/ze/fh/build/dependencies/simdjson/cmake_install.cmake",
-		"/Users/piushpaul/Projects/ze/fh/build/src/cmake_install.cmake",
-		"/Users/piushpaul/Projects/ze/fh/build/src/core/cmake_install.cmake"
+		"/home/pikachu/CLionProjects/ZE-FH/build/cmake_install.cmake",
+		"/home/pikachu/CLionProjects/ZE-FH/build/dependencies/cmake_install.cmake",
+		"/home/pikachu/CLionProjects/ZE-FH/build/dependencies/simdjson/cmake_install.cmake",
+		"/home/pikachu/CLionProjects/ZE-FH/build/src/cmake_install.cmake",
+		"/home/pikachu/CLionProjects/ZE-FH/build/src/core/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
