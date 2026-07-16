@@ -1,5 +1,5 @@
 
-namespace ZE::FH::Core {
+namespace ZE::Core {
   class IThread {
     public:
         virtual ~IThread() = default;

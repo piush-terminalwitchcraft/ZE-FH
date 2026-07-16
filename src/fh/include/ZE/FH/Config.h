@@ -14,8 +14,6 @@ namespace ZE::FH
     private:
         virtual void parseValue(const std::string_view &filename);
 
-    public:
-        virtual ~IConfig() = default;
     };
 
     class Config : public IConfig
@@ -26,13 +24,14 @@ namespace ZE::FH
         void parseValue(const std::string_view &data) override;
 
     public:
-        explicit Config(const std::string &filepath);
+        Config(const std::string &filepath);
 
         template<typename T>
-        T get(const std::string &key) const;
+        T get(const std::string_view &key) const;
 
-        template<typename T>
-        T set(const std::string &key, const ConfigValue &value);
+        void set(const std::string_view &key, const ConfigValue &value);
+
+        ~Config() = default;
     };
 
 } // namespace ZE::FH

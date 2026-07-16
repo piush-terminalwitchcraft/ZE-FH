@@ -1,5 +1,3 @@
-add_executable(ze_fh main.cpp)
-
 add_subdirectory(core)
+add_subdirectory(fh)
 
-target_link_libraries(ze_fh PRIVATE ze_fh_core)

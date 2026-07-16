@@ -1,15 +1,18 @@
-#include "../../include/ZE/FH/Config.h"
+#include "ZE/FH/Config.h"
+
+
 #include <algorithm>
 #include <cassert>
-#include <cstddef>
 #include <cstring>
 #include <fcntl.h>
 #include <iostream>
-#include <iterator>
+#include <map>
 #include <string>
 #include <string_view>
 #include <sys/mman.h>
 #include <sys/stat.h>
+
+#include "ZE/Core/Common/Conversion.hpp"
 
 namespace ZE::FH
 {
@@ -19,19 +22,24 @@ namespace ZE::FH
      * jaise key=value
      *
      */
+
+    void IConfig::parseValue(const std::string_view &filename) {}
+
     Config::Config(const std::string &filepath)
     {
         int fd = open(filepath.c_str(), O_RDONLY);
         if (fd == -1)
         {
             // throw error at some future logging class
-            std::cerr << "Failed to open configuration file";
+            std::cerr << "Failed to open configuration file\n";
+            return;
         }
 
         struct stat fileInfo;
         if (fstat(fd, &fileInfo) == -1)
         {
             std::cerr << "Failed to get file info";
+            return;
         }
 
         size_t fileSize = fileInfo.st_size;
@@ -73,7 +81,7 @@ namespace ZE::FH
         // regex -> seperate key=value logic
         int size = value.size();
         if (size == 0)
-            return;
+            return; // empty line ko ignore karo
 
         if (value[0] != '/')
         {
@@ -85,13 +93,42 @@ namespace ZE::FH
             const std::string_view mapValue =
                     std::string_view(sep + 1, (value.data() + value.size()) - (sep + 1)); // sep+1 -> end
 
-            std::cout << "Setting parsed " << key << "=" << mapValue;
+            std::cout << "Setting parsed " << key << "=" << mapValue << '\n';
+
+            int intVal{0};
+            if (ZE::Common::tryParseInt(mapValue, intVal))
+            {
+                Config::set(key, intVal);
+                return;
+            }
+
+            std::vector<std::string> strArray;
+            if (ZE::Common::tryParseArray(mapValue, strArray))
+            {
+                Config::set(key, std::move(strArray));
+            }
+
+            // normal string
+            Config::set(key, mapValue.data());
         }
     }
 
     template<typename T>
-    T Config::get(const std::string &key) const
+    T Config::get(const std::string_view &key) const
     {
-        return std::get<T>(this->settings.at(key));
+        return std::get<T>(this->settings.at(key.data()));
     }
+
+    void Config::set(const std::string_view &key, const ConfigValue &value)
+    {
+        if (this->settings.find(key.data()) == this->settings.end())
+        {
+            this->settings[key.data()] = value;
+        }
+        else
+        {
+            std::cerr << "Duplicate key-value pair found, for key={"<< key << "},  discarding it\n";
+        }
+    }
+
 } // namespace ZE::FH

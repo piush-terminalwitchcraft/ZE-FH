@@ -1,19 +1,9 @@
-#include <memory>
-#include "../include/ZE/FH/Config.h"
-#include "core/include/ZE/FH/Core/thread.h"
 
+#include "ZE/FH/MarketDataFeedHandler.h"
 
-namespace ZE::FH::Main
+int main (int argc, char *argv[])
 {
-    void start() { std::unique_ptr<ZE::FH::IConfig> appConfig = std::make_unique<ZE::FH::Config>("config.ini"); }
-
-
-} // namespace ZE::FH::Main
-
-
-int main(int argc, char *argv[])
-{
-
-    ZE::FH::Main::start();
+    ZE::FH::Main::MarketDataFeedHandler fh = ZE::FH::Main::MarketDataFeedHandler();
+    fh.start();
     return 0;
 }
