@@ -11,6 +11,7 @@
 #include <string_view>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <thread>
 
 #include "ZE/Core/Common/Conversion.hpp"
 
@@ -89,6 +90,7 @@ namespace ZE::FH
             const char *sep = static_cast<const char *>(std::memchr(value.begin(), '=', value.size()));
 
             assert(sep != nullptr);
+            std::thread thread ;
             const std::string_view key = std::string_view(value.data(), sep - value.data()); // 0 -> sep-1
             const std::string_view mapValue =
                     std::string_view(sep + 1, (value.data() + value.size()) - (sep + 1)); // sep+1 -> end
