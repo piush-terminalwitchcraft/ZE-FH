@@ -25,7 +25,8 @@ file(GLOB FH_HEADERS "include/*.h")
 
 # Create library for fh (configuration / helper code)
 add_library(ze_fh ${FH_SOURCES} ${FH_HEADERS}
-        include/ZE/FH/MarketDataFeedHandler.h)
+        include/ZE/FH/MarketDataFeedHandler.h
+        include/ZE/FH/MarketDataDispatcher.h)
 target_include_directories(ze_fh PUBLIC include ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(ze_fh PUBLIC ze_core)

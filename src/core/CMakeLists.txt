@@ -24,5 +24,6 @@ file(GLOB CORE_SOURCES "*.cpp")
 file(GLOB CORE_HEADERS "include/*.h")
 
 # Create library for core. Keep name independent and correct (ze_core).
-add_library(ze_core ${CORE_SOURCES} ${CORE_HEADERS})
+add_library(ze_core ${CORE_SOURCES} ${CORE_HEADERS}
+        include/ZE/Core/task.h)
 target_include_directories(ze_core PUBLIC include)
